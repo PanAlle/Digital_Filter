@@ -26,7 +26,7 @@ Use the C filter from the Task 1 to remove the noise.
 • Run your C filter.
 • Import the output of the C-filter to Matlab and plot it.
 
-#Implementation
+## Implementation
 
 So there are a couple of cvs file, 2 matlab scirpt and a c file
 RUN 
