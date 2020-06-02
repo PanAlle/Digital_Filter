@@ -1,3 +1,0 @@
-filename = 'csv_output.csv'
-M = csvread(filename);
-plot(M)
