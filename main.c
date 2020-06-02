@@ -11,7 +11,7 @@ defined, then with FILTER_ORDER + 1 sample we can compute the current filtered o
 //===================================
 
 
-#define FILTER_ORDER 2
+#define FILTER_ORDER 3
 //store filter coefficient
 typedef struct Filter {
     float a;
