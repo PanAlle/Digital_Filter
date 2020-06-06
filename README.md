@@ -1,4 +1,14 @@
 # Digital_Filter
+Write a generic filter in C and test it with matlab using shared csv files. 
+## Implementation
+
+So there are a couple of cvs file, 2 matlab scirpt and a c file
+
+IN ORDER TO RUN THE FILE CORRECTLY
+
+ 1) run butter filter.m first section
+ 2) run C file
+ 3) run butter filter.m second section 
 
 Write a generic filter in C (refer to lecture 3).
 Your implementation should
@@ -26,13 +36,4 @@ Use the C filter from the Task 1 to remove the noise.
 • Run your C filter.
 • Import the output of the C-filter to Matlab and plot it.
 
-## Implementation
-
-So there are a couple of cvs file, 2 matlab scirpt and a c file
-
-IN ORDER TO RUN THE FILE CORRECTLY
-
- 1) run butter filter.m first section
- 2) run C file
- 3) run butter filter.m second section 
  
