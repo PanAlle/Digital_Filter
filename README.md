@@ -29,7 +29,9 @@ Use the C filter from the Task 1 to remove the noise.
 ## Implementation
 
 So there are a couple of cvs file, 2 matlab scirpt and a c file
-RUN 
+
+IN ORDER TO RUN THE FILE CORRECTLY
+
  1) run butter filter.m first section
  2) run C file
  3) run butter filter.m second section 
