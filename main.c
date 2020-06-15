@@ -55,6 +55,7 @@ void ReadFilter(Filter *filter, char *FilterFileName) {
         //printf("Readinf of a and b for the filter %f, %f\n", filter[i].a, filter[i].b);
         i++;
     }
+    free(buf);
     fclose(fp);
 }
 
@@ -63,12 +64,7 @@ void ReadFilter(Filter *filter, char *FilterFileName) {
 void ReadSignal(char *ReadFileName, signal *signal, Filter *filter) {
     //Open a file in which writing the filter
     FILE *fw;
-    fw = fopen("C:\\Users\\utente\\CLionProjects\\Digital_Filter\\csv_output.csv", "w");
-    if (fw == NULL) {
-        printf("Can't find the file to write");
-        return 1;
-    }
-    printf("File trovato\n");
+    fw = fopen("csv_output.csv", "w")
 
     //Open a file from which reading the input values for the filter
     FILE *fp;
@@ -102,11 +98,12 @@ void ReadSignal(char *ReadFileName, signal *signal, Filter *filter) {
             signal[i + 1].time = signal[i].time;
             signal[i + 1].filt_out = signal[i].filt_out;
         }
-        //Set the first value to zero, since every value is shifted to the right, then the first value is not random
-        signal[0].val = 0;
-        signal[0].time = 0;
+        //val and time do not need to initialize,because they will one more time allocate later, but we should let file_out be zero
+        //because it will be called by the ButterFilter function and influence the result
         signal[0].filt_out = 0;
     }
+ 
+    free(buf);
     //Close read and write file
     fclose(fp);
     fclose(fw);
@@ -115,8 +112,8 @@ void ReadSignal(char *ReadFileName, signal *signal, Filter *filter) {
 
 int main() {
     //file name
-    char *ReadFileName = "C:\\Users\\utente\\CLionProjects\\Digital_Filter\\csv_prova.csv";
-    char *FilterFileName = "C:\\Users\\utente\\CLionProjects\\Digital_Filter\\butter_filter.csv";
+    char *ReadFileName = "csv_prova.csv";
+    char *FilterFileName = "butter_filter.csv";
     //struct to hold signals and filter
     Filter filter[FILTER_ORDER + 1];
     signal signal[FILTER_ORDER + 1];

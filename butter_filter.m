@@ -8,7 +8,7 @@ f_s = 1000;
 %Nyquist freq
 f_n = f_s/2;
 %Required ripple in dB
-ripple = 4;
+ripple = 3;
 %stopband required attenuation in dB
 A_s = 40;
 %Cutoff freq
