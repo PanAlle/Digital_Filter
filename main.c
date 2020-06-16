@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 //===================================
 /*The idea behind it is that, for a second order filter to work, we just need to know the output of
@@ -43,16 +44,15 @@ void ReadFilter(Filter *filter, char *FilterFileName) {
     FILE *fp;
     fp = fopen(FilterFileName, "r");
     if (fp == NULL) {
-        printf("Can't find the file");
-        return 1;
+        printf("Can't find the filter file");
+        exit(1);
     }
-    printf("File trovato\n");
+    printf("File found\n");
     int i = 0;
     //Allocate memory to store a line in the csv file
     char *buf = (char *) malloc(256);
     while (fgets(buf, 256, fp)) {
         sscanf(buf, "%f,%f", &filter[i].a, &filter[i].b);
-        //printf("Readinf of a and b for the filter %f, %f\n", filter[i].a, filter[i].b);
         i++;
     }
     free(buf);
@@ -61,20 +61,24 @@ void ReadFilter(Filter *filter, char *FilterFileName) {
 
 
 //Part that read the input singal, and apply the filter to it
-void ReadSignal(char *ReadFileName, signal *signal, Filter *filter) {
+void ReadSignal(char* OutputFileName, char *ReadFileName, signal *signal, Filter *filter) {
     //Open a file in which writing the filter
     FILE *fw;
-    fw = fopen("csv_output.csv", "w")
-
+    fw = fopen(OutputFileName, "w");
+    if (fw == NULL) {
+        printf("Can't find the output signal file");
+        exit(1);
+    }
+    printf("File found\n");
     //Open a file from which reading the input values for the filter
     FILE *fp;
     fp = fopen(ReadFileName, "r");
     if (fp == NULL) {
-        printf("Can't find the file");
-        return 1;
+        printf("Can't find the input signal file");
+        exit(1);
     }
-    printf("File trovato\n");
-    //Initilize to zero the struct values
+    printf("File found\n");
+    //Initialize to zero the struct values
     for (int j = 0; j < FILTER_ORDER + 1; ++j) {
         signal[j].val = 0;
         signal[j].time = 0;
@@ -87,7 +91,7 @@ void ReadSignal(char *ReadFileName, signal *signal, Filter *filter) {
         sscanf(buf, "%f,%f", &signal[0].val, &signal[0].time);
         //Apply the filter
         signal[0].filt_out = ButterFilter(filter, signal);
-        //Print to a file the filtered output and the corresponding timestamp
+        //Pri   nt to a file the filtered output and the corresponding timestamp
         fprintf(fw, "%f,%f\n", signal[0].filt_out, signal[0].time);
 
 
@@ -112,12 +116,13 @@ void ReadSignal(char *ReadFileName, signal *signal, Filter *filter) {
 
 int main() {
     //file name
-    char *ReadFileName = "csv_prova.csv";
-    char *FilterFileName = "butter_filter.csv";
+    char *ReadFileName = "C:\\Users\\utente\\CLionProjects\\Digital_Filter\\csv_prova.csv";
+    char *FilterFileName = "C:\\Users\\utente\\CLionProjects\\Digital_Filter\\butter_filter.csv";
+    char *OutputFileName = "C:\\Users\\utente\\CLionProjects\\Digital_Filter\\csv_output.csv";
     //struct to hold signals and filter
     Filter filter[FILTER_ORDER + 1];
     signal signal[FILTER_ORDER + 1];
     ReadFilter(filter, FilterFileName);
-    ReadSignal(ReadFileName, signal, filter);
+    ReadSignal(OutputFileName, ReadFileName, signal, filter);
     return 0;
 }
