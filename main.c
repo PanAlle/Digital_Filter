@@ -2,7 +2,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 //===================================
 /*The idea behind it is that, for a second order filter to work, we just need to know the output of
