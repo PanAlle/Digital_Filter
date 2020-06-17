@@ -37,8 +37,6 @@ filt_sig = filter(b, a, y);
 filename = 'csv_output.csv'
 M = csvread(filename);
 
-%tiledlayout(2,1) % Requires R2019b or later
-
 
 
 subplot(2,1,1);

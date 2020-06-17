@@ -38,7 +38,7 @@ float ButterFilter(Filter *filter, signal *signal) {
     return output;
 }
 
-//read the filter coefficient from a file and insert them in the Filter struct.The coefficient are always equal to FILTER_ORDER + 1
+//Read the filter coefficient from a file and insert them in the Filter struct.The coefficient are always equal to FILTER_ORDER + 1
 void ReadFilter(Filter *filter, char *FilterFileName) {
     FILE *fp;
     fp = fopen(FilterFileName, "r");
@@ -59,7 +59,7 @@ void ReadFilter(Filter *filter, char *FilterFileName) {
 }
 
 
-//Part that read the input singal, and apply the filter to it
+//Part that read the input signal, and apply the filter to it
 void ReadSignal(char* OutputFileName, char *ReadFileName, signal *signal, Filter *filter) {
     //Open a file in which writing the filter
     FILE *fw;
@@ -90,7 +90,7 @@ void ReadSignal(char* OutputFileName, char *ReadFileName, signal *signal, Filter
         sscanf(buf, "%f,%f", &signal[0].val, &signal[0].time);
         //Apply the filter
         signal[0].filt_out = ButterFilter(filter, signal);
-        //Pri   nt to a file the filtered output and the corresponding timestamp
+        //Print to a file the filtered output and the corresponding timestamp
         fprintf(fw, "%f,%f\n", signal[0].filt_out, signal[0].time);
 
 
